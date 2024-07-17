@@ -6,6 +6,7 @@ import { Fab } from "./components/Fab";
 import { Transactions } from "./components/Transactions";
 import { EditAccountModal } from "./modals/EditAccountModal";
 import { NewAccountModal } from "./modals/NewAccountModal";
+import { NewCategoryModal } from "./modals/NewCategoryModal";
 import { NewTransactionModal } from "./modals/NewTransactionsModal";
 
 export default function Dashboard() {
@@ -28,6 +29,7 @@ export default function Dashboard() {
             <Fab />
             <NewAccountModal />
             <NewTransactionModal />
+            <NewCategoryModal />
             {accountBeingEdited && <EditAccountModal />}
           </div>
         )}

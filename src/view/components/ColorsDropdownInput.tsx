@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ChevronDownIcon, CrossCircledIcon } from "@radix-ui/react-icons";
-import Chroma from "chroma-js";
 
 import { cn } from "../../app/utils/cn";
 import { DropdownMenu } from "./DropdownMenu";
 import { ColorIcon } from "./icons/ColorsIcon";
+import generateBackgroundColor from "../../app/utils/generateBackgroundColor";
 
 interface ColorsDropdownInputProps {
   error?: string;
@@ -50,16 +50,6 @@ export function ColorsDropdownInput({
   const [colorError, setColorError] = useState<string | null>(null);
 
   const regex = /#[0-9A-Fa-f]{6}/g;
-
-  function generateBackgroundColor(foregroundColor: string): string {
-    const foregroundColorChroma = Chroma(foregroundColor);
-
-    const backgroundColorChroma = foregroundColorChroma.luminance(0.9);
-
-    const backgroundColor = backgroundColorChroma.hex();
-
-    return backgroundColor;
-  }
 
   function handleSelect(color: Color) {
     setSelectedColor(color);
@@ -107,20 +97,10 @@ export function ColorsDropdownInput({
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content side="bottom" className="grid grid-cols-4">
-          {colors.map((color) => (
-            <DropdownMenu.Item
-              key={color.color}
-              onSelect={() => handleSelect(color)}
-              className="flex items-center justify-center"
-            >
-              <ColorIcon color={color.color} bg={color.bg} />
-            </DropdownMenu.Item>
-          ))}
-
           <div className="relative h-9 col-span-full rounded-xl border border-gray-500 pr-9">
             <ColorIcon
               color={selectedColor?.color ?? "#10b981"}
-              bg={generateBackgroundColor(selectedColor?.color ?? "#10b981")}
+              bg={generateBackgroundColor(selectedColor?.color ?? "#EBFBEE")}
               classname="absolute right-1"
             />
 
@@ -134,6 +114,16 @@ export function ColorsDropdownInput({
               maxLength={7}
             />
           </div>
+
+          {colors.map((color) => (
+            <DropdownMenu.Item
+              key={color.color}
+              onSelect={() => handleSelect(color)}
+              className="flex items-center justify-center"
+            >
+              <ColorIcon color={color.color} bg={color.bg} />
+            </DropdownMenu.Item>
+          ))}
         </DropdownMenu.Content>
       </DropdownMenu.Root>
 

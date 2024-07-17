@@ -72,7 +72,7 @@ export function Select({
                   <RdxSelect.Item
                     value={option.value}
                     key={index}
-                    className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold data-[highlighted]:bg-gray-50 transition-colors rounded-md outline-none"
+                    className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold data-[highlighted]:bg-gray-50 transition-colors rounded-md outline-none cursor-pointer hover:bg-gray-50"
                   >
                     <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
                   </RdxSelect.Item>

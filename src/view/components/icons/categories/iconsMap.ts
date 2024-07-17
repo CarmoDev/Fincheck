@@ -1,3 +1,26 @@
+import {
+  WaterDrop,
+  FlashOnOutlined,
+  WaterfallChartOutlined,
+  AccountTreeOutlined,
+  PetsOutlined,
+  HeartBroken,
+  SpaOutlined,
+  FitnessCenter,
+  RedeemOutlined,
+  CreditCardOutlined,
+  PixOutlined,
+  SellOutlined,
+  SavingsOutlined,
+  CurrencyBitcoin,
+  AnalyticsOutlined,
+  FavoriteBorderOutlined,
+  ClassOutlined,
+  Interests,
+  NotInterestedOutlined,
+  LocalTaxiOutlined,
+} from "@mui/icons-material";
+
 import { Clothes } from "./expense/Clothes";
 import { Education } from "./expense/Education";
 import { Expense } from "./expense/Expense";
@@ -24,4 +47,27 @@ export const iconsMap = {
     transport: Transport,
     travel: Travel,
   },
+};
+
+export const newIconsMap = {
+  WaterDrop: WaterDrop,
+  FlashOnOutlined: FlashOnOutlined,
+  WaterfallChartOutlined: WaterfallChartOutlined,
+  AccountTreeOutlined: AccountTreeOutlined,
+  PetsOutlined: PetsOutlined,
+  HeartBroken: HeartBroken,
+  SpaOutlined: SpaOutlined,
+  FitnessCenter: FitnessCenter,
+  RedeemOutlined: RedeemOutlined,
+  CreditCardOutlined: CreditCardOutlined,
+  PixOutlined: PixOutlined,
+  SellOutlined: SellOutlined,
+  SavingsOutlined: SavingsOutlined,
+  CurrencyBitcoin: CurrencyBitcoin,
+  AnalyticsOutlined: AnalyticsOutlined,
+  FavoriteBorderOutlined: FavoriteBorderOutlined,
+  ClassOutlined: ClassOutlined,
+  Interests: Interests,
+  NotInterestedOutlined: NotInterestedOutlined,
+  LocalTaxiOutlined: LocalTaxiOutlined,
 };

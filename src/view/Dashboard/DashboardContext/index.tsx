@@ -15,6 +15,9 @@ interface DashboardContextValue {
   accountBeingEdited: null | BankAccount;
   openEditAccountModal(bankAccount: BankAccount): void;
   closeEditAccountModal(): void;
+  openNewCategoryModal(): void;
+  closeNewCategoryModal(): void;
+  isNewCategoryModalOpen: boolean;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
@@ -30,6 +33,7 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [isEditAccountModalOpen, setIsEditAccountModalOpen] = useState(true);
   const [accountBeingEdited, setAccountBeingEdited] =
     useState<null | BankAccount>(null);
+  const [isNewCategoryModalOpen, setIsNewCategoryModalOpen] = useState(true);
 
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState);
@@ -63,6 +67,14 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
     setIsEditAccountModalOpen(false);
   }, []);
 
+  const openNewCategoryModal = useCallback(() => {
+    setIsNewCategoryModalOpen(true);
+  }, []);
+
+  const closeNewCategoryModal = useCallback(() => {
+    setIsNewCategoryModalOpen(false);
+  }, []);
+
   return (
     <DashboardContext.Provider
       value={{
@@ -79,6 +91,9 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         accountBeingEdited,
         openEditAccountModal,
         closeEditAccountModal,
+        openNewCategoryModal,
+        closeNewCategoryModal,
+        isNewCategoryModalOpen,
       }}
     >
       {children}

@@ -1,9 +1,11 @@
-import { ExitIcon } from "@radix-ui/react-icons";
+import UpgradeIcon from "@mui/icons-material/Upgrade";
+import { ExitIcon, GearIcon } from "@radix-ui/react-icons";
+
 import { DropdownMenu } from "./DropdownMenu";
 import { useAuth } from "../../app/hooks/useAuth";
 
 export function UserMenu() {
-  const { signout, user } = useAuth();
+  const { signout, user, isPremium } = useAuth();
 
   return (
     <DropdownMenu.Root>
@@ -15,7 +17,27 @@ export function UserMenu() {
         </div>
       </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content align="end" className="w-32">
+      <DropdownMenu.Content align="end" className="w-fit">
+        {!isPremium && (
+          <DropdownMenu.Item
+            onSelect={signout}
+            className="flex items-center justify-between"
+          >
+            Melhorar Plano
+            <UpgradeIcon className="w-4 h-4 text-teal-900" />
+          </DropdownMenu.Item>
+        )}
+
+        {isPremium && (
+          <DropdownMenu.Item
+            onSelect={signout}
+            className="flex items-center justify-between"
+          >
+            Assinaturas
+            <GearIcon className="w-4 h-4" />
+          </DropdownMenu.Item>
+        )}
+
         <DropdownMenu.Item
           onSelect={signout}
           className="flex items-center justify-between"

@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { localStorageKeys } from "../config/localstorageKeys";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "../services/usersService";
@@ -11,6 +17,7 @@ interface AuthContextValue {
   user: User | undefined;
   signin(accessToken: string): void;
   signout(): void;
+  isPremium: boolean;
 }
 
 export const AuthContext = createContext({} as AuthContextValue);
@@ -30,6 +37,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     enabled: signedIn,
     staleTime: Infinity,
   });
+
+  const isPremium = useMemo(() => data?.role !== "FREE", [data]);
 
   const signin = useCallback((accessToken: string) => {
     localStorage.setItem(localStorageKeys.ACCESS_TOKEN, accessToken);
@@ -58,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signedIn: isSuccess && signedIn,
         signin,
         signout,
+        isPremium,
       }}
     >
       <LaunchScreen isLoading={isFetching} />

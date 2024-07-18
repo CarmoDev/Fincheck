@@ -1,4 +1,5 @@
 import { Logotype } from "../components/Logotype";
+import { UpgradePlanModal } from "../components/UpgradePlanModal";
 import { UserMenu } from "../components/UserMenu";
 import { DashboardContext, DashboardProvider } from "./DashboardContext";
 import { Accounts } from "./components/Accounts";
@@ -31,6 +32,7 @@ export default function Dashboard() {
             <NewTransactionModal />
             <NewCategoryModal />
             {accountBeingEdited && <EditAccountModal />}
+            <UpgradePlanModal />
           </div>
         )}
       </DashboardContext.Consumer>

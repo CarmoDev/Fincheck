@@ -8,6 +8,7 @@ import { cn } from "../../app/utils/cn";
 import { useState } from "react";
 import { TrashIcon } from "./icons/TrashIcon";
 import { Spinner } from "./spinner";
+import { useAuth } from "../../app/hooks/useAuth";
 
 interface SelectProps {
   className?: string;
@@ -33,6 +34,8 @@ export function Select({
   onDelete,
   isLoadingDelete,
 }: SelectProps) {
+  const { isPremium } = useAuth();
+
   const [selectedValue, setSelectedValue] = useState(value);
 
   function handleSelect(value: string) {
@@ -85,7 +88,7 @@ export function Select({
                     >
                       <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
                     </RdxSelect.Item>
-                    {onDelete && (
+                    {onDelete && isPremium && (
                       <button
                         onClick={() => onDelete(option.value)}
                         disabled={isLoadingDelete}

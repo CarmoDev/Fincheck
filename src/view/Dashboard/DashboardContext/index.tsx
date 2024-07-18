@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useState } from "react";
 import { BankAccount } from "../../../app/entities/BankAccount";
+import { useAuth } from "../../../app/hooks/useAuth";
 
 interface DashboardContextValue {
   areValuesVisible: boolean;
@@ -18,6 +19,8 @@ interface DashboardContextValue {
   openNewCategoryModal(): void;
   closeNewCategoryModal(): void;
   isNewCategoryModalOpen: boolean;
+  closeUpgradePlanModal(): void;
+  isUpgradePlanModalOpen: boolean;
 }
 
 export const DashboardContext = createContext({} as DashboardContextValue);
@@ -34,6 +37,9 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   const [accountBeingEdited, setAccountBeingEdited] =
     useState<null | BankAccount>(null);
   const [isNewCategoryModalOpen, setIsNewCategoryModalOpen] = useState(false);
+  const [isUpgradePlanModalOpen, setIsUpgradePlanModalOpen] = useState(false);
+
+  const { isPremium } = useAuth();
 
   const toggleValuesVisibility = useCallback(() => {
     setAreValuesVisible((prevState) => !prevState);
@@ -68,11 +74,20 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const openNewCategoryModal = useCallback(() => {
-    setIsNewCategoryModalOpen(true);
-  }, []);
+    if (isPremium) {
+      setIsNewCategoryModalOpen(true);
+      return;
+    }
+
+    setIsUpgradePlanModalOpen(true);
+  }, [isPremium]);
 
   const closeNewCategoryModal = useCallback(() => {
     setIsNewCategoryModalOpen(false);
+  }, []);
+
+  const closeUpgradePlanModal = useCallback(() => {
+    setIsUpgradePlanModalOpen(false);
   }, []);
 
   return (
@@ -94,6 +109,8 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
         openNewCategoryModal,
         closeNewCategoryModal,
         isNewCategoryModalOpen,
+        closeUpgradePlanModal,
+        isUpgradePlanModalOpen,
       }}
     >
       {children}

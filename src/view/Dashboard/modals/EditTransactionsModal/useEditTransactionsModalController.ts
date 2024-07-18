@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { transactionsService } from "../../../../app/services/transactionsService";
 import toast from "react-hot-toast";
 import { currencyStringToNumber } from "../../../../app/utils/currencyStringToNumber";
+import { categoriesService } from "../../../../app/services/categoriesService";
 
 const schema = z.object({
   value: z.union([z.string().nonempty("Informe o valor"), z.number()]),
@@ -141,6 +142,20 @@ export function useEditTransactionsModalController(
     );
   }, [categoriesList, transaction]);
 
+  const { isLoading: isloadingDelete, mutateAsync: removeCategory } =
+    useMutation(categoriesService.remove);
+
+  async function handleDeleteCategory(categoryId: string) {
+    try {
+      await removeCategory(categoryId);
+
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      toast.success("Categoria deletada com sucesso!");
+    } catch {
+      toast.error("Erro ao deletar Categoria!");
+    }
+  }
+
   return {
     handleSubmit,
     register,
@@ -156,5 +171,7 @@ export function useEditTransactionsModalController(
     handleDeleteManyTransaction,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
+    handleDeleteCategory,
+    isloadingDelete,
   };
 }

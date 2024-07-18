@@ -36,6 +36,8 @@ export function EditTransactionModal({
     handleDeleteManyTransaction,
     handleCloseDeleteModal,
     handleOpenDeleteModal,
+    handleDeleteCategory,
+    isloadingDelete,
   } = useEditTransactionsModalController(transaction, onClose);
 
   const isExpense = transaction?.type === "EXPENSE";
@@ -111,6 +113,8 @@ export function EditTransactionModal({
                 value={value}
                 placeholder="Tipo"
                 error={errors.categoryId?.message}
+                onDelete={handleDeleteCategory}
+                isLoadingDelete={isloadingDelete}
                 options={categories.map((category) => ({
                   value: category.id,
                   label: category.name,

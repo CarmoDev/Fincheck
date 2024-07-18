@@ -6,6 +6,8 @@ import {
 } from "@radix-ui/react-icons";
 import { cn } from "../../app/utils/cn";
 import { useState } from "react";
+import { TrashIcon } from "./icons/TrashIcon";
+import { Spinner } from "./spinner";
 
 interface SelectProps {
   className?: string;
@@ -17,6 +19,8 @@ interface SelectProps {
     value: string;
     label: string;
   }[];
+  onDelete?(value: string): void;
+  isLoadingDelete?: boolean;
 }
 
 export function Select({
@@ -26,6 +30,8 @@ export function Select({
   options,
   onChange,
   value,
+  onDelete,
+  isLoadingDelete,
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(value);
 
@@ -69,13 +75,29 @@ export function Select({
               </RdxSelect.ScrollUpButton>
               <RdxSelect.Viewport className="p-2">
                 {options.map((option, index) => (
-                  <RdxSelect.Item
-                    value={option.value}
+                  <div
                     key={index}
-                    className="p-2 text-gray-800 text-sm data-[state=checked]:font-bold data-[highlighted]:bg-gray-50 transition-colors rounded-md outline-none cursor-pointer hover:bg-gray-50"
+                    className="flex justify-between items-center"
                   >
-                    <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
-                  </RdxSelect.Item>
+                    <RdxSelect.Item
+                      value={option.value}
+                      className="w-full p-2 text-gray-800 text-sm data-[state=checked]:font-bold data-[highlighted]:bg-gray-50 transition-colors rounded-md outline-none cursor-pointer hover:bg-gray-50"
+                    >
+                      <RdxSelect.ItemText>{option.label}</RdxSelect.ItemText>
+                    </RdxSelect.Item>
+                    {onDelete && (
+                      <button
+                        onClick={() => onDelete(option.value)}
+                        disabled={isLoadingDelete}
+                      >
+                        {isLoadingDelete ? (
+                          <Spinner className="w-6 h-6" />
+                        ) : (
+                          <TrashIcon className="w-5 h-5 cursor-pointer text-red-600" />
+                        )}
+                      </button>
+                    )}
+                  </div>
                 ))}
               </RdxSelect.Viewport>
               <RdxSelect.ScrollDownButton className="flex items-center justify-center h-[25px] bg-white text-gray-800 cursor-default">

@@ -51,7 +51,9 @@ export function ConfirmDeleteModal({
           onClick={onConfirm}
           isLoading={isLoading}
         >
-          Sim, desejo excluir apenas essa
+          {hasParcels
+            ? "Sim, desejo excluir apenas essa"
+            : "Sim, desejo excluir"}
         </Button>
 
         {hasParcels && (

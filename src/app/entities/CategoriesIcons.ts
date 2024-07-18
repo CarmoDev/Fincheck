@@ -5,7 +5,7 @@ export interface ICategoriesIcons {
 }
 
 export interface IIcons {
-  x: number;
-  y: number;
-  color: string;
+  x?: number;
+  y?: number;
+  color?: string;
 }

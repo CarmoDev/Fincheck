@@ -1,21 +1,20 @@
 import axios from "axios";
 import { localStorageKeys } from "../config/localstorageKeys";
-// import { sleep } from "../utils/sleep";
 
 export const httpClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
 });
 
 httpClient.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
+    const accessToken = localStorage.getItem(localStorageKeys.ACCESS_TOKEN);
 
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  }
+    if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+    }
 
-  return config;
+    return config;
 });
 
 httpClient.interceptors.response.use(async (data) => {
-  return data;
+    return data;
 });

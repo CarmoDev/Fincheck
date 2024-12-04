@@ -7,20 +7,20 @@ import Dashboard from "../view/Dashboard";
 import AuthLayout from "../view/layouts/AuthLayout";
 
 export function Router() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AuthGuard isPrivate={false} />}>
-          <Route element={<AuthLayout />}>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
-        </Route>
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route element={<AuthGuard isPrivate={false} />}>
+                    <Route element={<AuthLayout />}>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                    </Route>
+                </Route>
 
-        <Route element={<AuthGuard isPrivate={true} />}>
-          <Route path="/" element={<Dashboard />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
+                <Route element={<AuthGuard isPrivate={true} />}>
+                    <Route path="/" element={<Dashboard />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }

@@ -7,22 +7,22 @@ import { AuthProvider } from "./app/contexts/AuthContext";
 import { Router } from "./Router";
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      refetchOnWindowFocus: false,
+    defaultOptions: {
+        queries: {
+            retry: false,
+            refetchOnWindowFocus: false,
+        },
     },
-  },
 });
 
 export function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <AuthProvider>
-        <Router />
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools />
+            <AuthProvider>
+                <Router />
+                <Toaster />
+            </AuthProvider>
+        </QueryClientProvider>
+    );
 }

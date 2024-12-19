@@ -33,27 +33,29 @@ export function Accounts() {
 
             {!isLoading && (
                 <>
-                    <header className="">
-                        <span className="tracking-[-0.5px] text-white block">
-                            Saldo total
-                        </span>
+                    <header className="flex w-full justify-between items-center">
+                        <div>
+                            <span className="tracking-[-0.5px] text-white block">
+                                Saldo total
+                            </span>
 
-                        <div className="flex items-center gap-2">
-                            <strong
-                                className={cn(
-                                    "text-2xl tracking-[-1px] text-white",
-                                    !areValuesVisible && "blur-md"
-                                )}
-                            >
-                                {formatCurrency(currentBalance)}
-                            </strong>
+                            <div className="flex items-center gap-2">
+                                <strong
+                                    className={cn(
+                                        "text-2xl tracking-[-1px] text-white",
+                                        !areValuesVisible && "blur-md"
+                                    )}
+                                >
+                                    {formatCurrency(currentBalance)}
+                                </strong>
 
-                            <button
-                                onClick={toggleValuesVisibility}
-                                className="w-8 h-8 flex items-center justify-center"
-                            >
-                                <EyeIcon open={!areValuesVisible} />
-                            </button>
+                                <button
+                                    onClick={toggleValuesVisibility}
+                                    className="w-8 h-8 flex items-center justify-center"
+                                >
+                                    <EyeIcon open={!areValuesVisible} />
+                                </button>
+                            </div>
                         </div>
                     </header>
 
